@@ -57,4 +57,9 @@
         let currentSlide = 1;
         setInterval(() => {
             document.getElementById('slide' + currentSlide).classList.replace('opacity-100', 'opacity-0');
-            currentSlide = currentSlide < 3 ? currentSlide + 1
+            currentSlide = currentSlide < 3 ? currentSlide + 1 : 1;
+            document.getElementById('slide' + currentSlide).classList.replace('opacity-0', 'opacity-100');
+        }, 2500);
+    </script>
+</body>
+</html>
