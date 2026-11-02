@@ -1,65 +1,412 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Almaxia - Creaciones Compartidas</title>
+
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body { font-family: 'Montserrat', sans-serif; }
+
+        /* =========================
+           CONFIGURACIÓN GENERAL
+        ========================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #08000d;
+        }
+
+        /* =========================
+           FONDO ANIMADO CSS PURO
+        ========================= */
+
+        .animated-bg {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            background: #08000d;
+        }
+
+        /* Masa principal violeta */
+
+        .animated-bg::before {
+            content: "";
+            position: fixed;
+            inset: -35%;
+            z-index: -3;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    ellipse at 20% 48%,
+                    #e5d4ed 0%,
+                    #a77cbb 9%,
+                    #642078 22%,
+                    transparent 43%
+                ),
+
+                radial-gradient(
+                    ellipse at 76% 30%,
+                    #8a27b5 0%,
+                    #49105f 23%,
+                    transparent 48%
+                ),
+
+                radial-gradient(
+                    ellipse at 65% 85%,
+                    #68158d 0%,
+                    #300b48 28%,
+                    transparent 55%
+                ),
+
+                radial-gradient(
+                    ellipse at 45% 50%,
+                    #240b35 0%,
+                    transparent 65%
+                );
+
+            filter: blur(35px);
+            will-change: transform;
+
+            animation: liquidBase 22s ease-in-out infinite alternate;
+        }
+
+        /* Nubes de luz y pigmento */
+
+        .animated-bg::after {
+            content: "";
+            position: fixed;
+            inset: -40%;
+            z-index: -2;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    ellipse at 35% 30%,
+                    rgba(238, 210, 255, 0.75),
+                    transparent 20%
+                ),
+
+                radial-gradient(
+                    ellipse at 70% 60%,
+                    rgba(174, 65, 230, 0.65),
+                    transparent 27%
+                ),
+
+                radial-gradient(
+                    ellipse at 45% 85%,
+                    rgba(105, 20, 150, 0.8),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    ellipse at 90% 15%,
+                    rgba(130, 40, 190, 0.4),
+                    transparent 25%
+                );
+
+            filter: blur(45px);
+            mix-blend-mode: screen;
+            will-change: transform, opacity;
+
+            animation: liquidCloud 16s ease-in-out infinite alternate;
+        }
+
+        /* Sombra central */
+
+        .liquid-shadow {
+            position: fixed;
+            inset: -20%;
+            z-index: -1;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    ellipse at 50% 50%,
+                    #08000d 0%,
+                    rgba(8, 0, 13, 0.85) 19%,
+                    transparent 49%
+                );
+
+            filter: blur(25px);
+            will-change: transform;
+
+            animation: liquidShadow 19s ease-in-out infinite alternate;
+        }
+
+        /* Resplandor blanco y violeta */
+
+        .light-layer {
+            position: fixed;
+            inset: -25%;
+            z-index: 0;
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    ellipse at 12% 40%,
+                    rgba(255, 255, 255, 0.45),
+                    transparent 18%
+                ),
+
+                radial-gradient(
+                    ellipse at 90% 70%,
+                    rgba(187, 89, 255, 0.3),
+                    transparent 22%
+                ),
+
+                radial-gradient(
+                    ellipse at 50% 10%,
+                    rgba(160, 80, 220, 0.2),
+                    transparent 30%
+                );
+
+            mix-blend-mode: screen;
+            filter: blur(35px);
+            will-change: transform, opacity;
+
+            animation: liquidLight 12s ease-in-out infinite alternate;
+        }
+
+        /* =========================
+           ANIMACIONES
+        ========================= */
+
+        @keyframes liquidBase {
+
+            0% {
+                transform: translate3d(-3%, 2%, 0) rotate(-5deg) scale(1);
+            }
+
+            50% {
+                transform: translate3d(3%, -3%, 0) rotate(4deg) scale(1.12);
+            }
+
+            100% {
+                transform: translate3d(-2%, -1%, 0) rotate(-3deg) scale(1.06);
+            }
+
+        }
+
+        @keyframes liquidCloud {
+
+            0% {
+                transform: translate3d(-8%, 5%, 0) rotate(0deg) scale(.9);
+                opacity: .6;
+            }
+
+            50% {
+                transform: translate3d(7%, -5%, 0) rotate(12deg) scale(1.15);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate3d(-3%, 8%, 0) rotate(-8deg) scale(1.08);
+                opacity: .75;
+            }
+
+        }
+
+        @keyframes liquidShadow {
+
+            0% {
+                transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate3d(5%, -4%, 0) scale(1.18);
+            }
+
+            100% {
+                transform: translate3d(-5%, 4%, 0) scale(.95);
+            }
+
+        }
+
+        @keyframes liquidLight {
+
+            0% {
+                transform: translate3d(-5%, 0, 0) scale(.9);
+                opacity: .4;
+            }
+
+            50% {
+                transform: translate3d(5%, -3%, 0) scale(1.2);
+                opacity: .9;
+            }
+
+            100% {
+                transform: translate3d(0, 5%, 0) scale(1);
+                opacity: .55;
+            }
+
+        }
+
+        /* =========================
+           ACCESIBILIDAD
+        ========================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            .animated-bg::before,
+            .animated-bg::after,
+            .liquid-shadow,
+            .light-layer {
+                animation: none;
+            }
+
+        }
+
     </style>
+
 </head>
-<body class="h-screen w-screen overflow-hidden bg-[url('assets/fondo0.jpg')] bg-cover bg-center bg-no-repeat">
-    
-    <div class="flex flex-col gap-10 items-center h-full w-full bg-black/70 backdrop-blur-sm p-6 text-center text-white">
-        
-        <!-- Logo superior -->
+
+<body class="animated-bg h-screen w-screen overflow-hidden">
+
+    <!-- Capas adicionales del fondo -->
+    <div class="liquid-shadow"></div>
+    <div class="light-layer"></div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+
+    <main class="relative z-10 flex flex-col gap-10 items-center h-full w-full bg-black/25 backdrop-blur-sm p-6 text-center text-white">
+
+        <!-- LOGO -->
+
         <div class="mt-2">
-            <img src="assets/NOKMBRE.png" alt="Almaxia" class="w-64 h-auto object-contain drop-shadow-lg">
+
+            <img
+                src="assets/NOKMBRE.png"
+                alt="Almaxia"
+                class="w-64 h-auto object-contain drop-shadow-lg"
+            >
+
         </div>
 
-        <!-- Textos centrales -->
+
+        <!-- TEXTOS CENTRALES -->
+
         <div class="flex flex-col gap-3 px-2">
-            <p class="text-base font-bold leading-snug">¡Gracias por participar de esta experiencia y formar parte de la obra!</p>
-            <p class="text-xs font-medium leading-relaxed">Acá podés encontrar la fotografía de la creación que realizaron en conjunto</p>
+
+            <p class="text-lg font-bold leading-snug">
+                ¡Gracias por participar de esta experiencia y formar parte de la obra!
+            </p>
+
+            <p class="text-sm font-medium leading-relaxed">
+                Acá podés encontrar la fotografía de la creación que realizaron en conjunto.
+            </p>
+
         </div>
 
-        <!-- Carrusel automático -->
+
+        <!-- CARRUSEL AUTOMÁTICO -->
+
         <div class="relative w-full max-w-[280px] h-24 rounded-xl overflow-hidden shadow-lg border border-white/20 my-2 bg-black/50">
-            <img id="slide1" src="assets/muestra1.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100">
-            <img id="slide2" src="assets/muestra2.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
-            <img id="slide3" src="assets/muestra3.png" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0">
+
+            <img
+                id="slide1"
+                src="assets/muestra1.png"
+                alt="Muestra 1"
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-100"
+            >
+
+            <img
+                id="slide2"
+                src="assets/muestra2.png"
+                alt="Muestra 2"
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0"
+            >
+
+            <img
+                id="slide3"
+                src="assets/muestra3.png"
+                alt="Muestra 3"
+                class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 opacity-0"
+            >
+
         </div>
 
-        <!-- Texto movido, botón inferior y créditos -->
+
+        <!-- BOTÓN Y CRÉDITOS -->
+
         <div class="mb-2 w-full flex flex-col items-center">
-            
-            <p class="text-xs font-medium leading-relaxed mb-3 px-2">Buscá tu creación y llevate un recuerdo de lo que construyeron entre los tres.</p>
-            
-            <a href="https://drive.google.com/drive/u/0/folders/1NXwx9ukY9cYanuUcol5xG" 
-               class="block w-full bg-white text-purple-900 font-bold py-3.5 rounded-full shadow-[0_4px_14px_0_rgba(255,255,255,0.3)] active:scale-95 transition-transform uppercase tracking-wide text-sm mb-4">
-               buscar mi creación
+
+            <p class="text-sm font-medium leading-relaxed mb-3 px-2">
+                Buscá tu creación y llevate un recuerdo de lo que construyeron entre los tres.
+            </p>
+
+            <a
+                href="https://drive.google.com/drive/u/0/folders/1NXwx9ukY9cYanuUcol5xG"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block w-full bg-white text-purple-900 font-bold py-3.5 rounded-full shadow-[0_4px_14px_0_rgba(255,255,255,0.3)] active:scale-95 transition-transform uppercase tracking-wide text-sm mb-4"
+            >
+                Buscar mi creación
             </a>
-            
+
+
+            <!-- CRÉDITOS -->
+
             <div class="flex flex-col items-center gap-1.5 text-[10px] tracking-widest uppercase text-center">
-                <span class="text-white/70 font-semibold">Creado por Julia Gimenez</span>
-                <span class="text-white/40 text-[9px]">Festival Artimañas 2026 • La Plata, Buenos Aires</span>
+
+                <span class="text-white/70 font-semibold">
+                    Creado por Julia Gimenez
+                </span>
+
+                <span class="text-white/40 text-[9px]">
+                    Festival Artimañas 2026 • La Plata, Buenos Aires
+                </span>
+
             </div>
+
         </div>
 
-    </div>
+    </main>
 
-    <!-- Script de rotación de imágenes -->
+
+    <!-- =========================
+         JAVASCRIPT: CARRUSEL
+    ========================= -->
+
     <script>
+
         let currentSlide = 1;
+
+        const totalSlides = 3;
+
         setInterval(() => {
-            document.getElementById('slide' + currentSlide).classList.replace('opacity-100', 'opacity-0');
-            currentSlide = currentSlide < 3 ? currentSlide + 1 : 1;
-            document.getElementById('slide' + currentSlide).classList.replace('opacity-0', 'opacity-100');
+
+            const currentImage = document.getElementById(`slide${currentSlide}`);
+
+            currentImage.classList.replace('opacity-100', 'opacity-0');
+
+            currentSlide = currentSlide < totalSlides
+                ? currentSlide + 1
+                : 1;
+
+            const nextImage = document.getElementById(`slide${currentSlide}`);
+
+            nextImage.classList.replace('opacity-0', 'opacity-100');
+
         }, 2500);
+
     </script>
+
 </body>
 </html>
